@@ -1,0 +1,68 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: base-payments-gateway
+  cloud:
+    loadbalancer:
+      hint:
+        base-payments: eureka  # Ensures that it uses Eureka to resolve base-payments instances
+    gateway:
+      httpclient:
+        wiretap: true
+      routes:
+        - id: orders-route
+          uri: lb://BASE-PAYMENTS
+          predicates:
+            - Path=/orders/**
+          filters:
+            - AddRequestHeader=version, 1.0.0
+
+        - id: products-route
+          uri: lb://BASE-PAYMENTS
+          predicates:
+            - Path=/products/**
+          filters:
+            - AddRequestHeader=version, 1.0.0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/  # Ensure this points to your Eureka server URL
+    register-with-eureka: false
+    fetch-registry: true
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+    statusPageUrlPath: /actuator/info              # URL path for info endpoint
+    healthCheckUrlPath: /actuator/health           # URL path for health endpoint
+    statusPageUrl: http://${eureka.instance.ip-address}:${server.port}/actuator/info  # Full status URL
+    healthCheckUrl: http://${eureka.instance.ip-address}:${server.port}/actuator/health # Full health URL
+    ip-address: localhost # This is the IP address that Eureka will use to register the service
+    hostname: base-payments-gateway
+
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.web: TRACE
+    com.netflix.discovery: TRACE
+    org.springframework.cloud.client.discovery: TRACE
+
+management:
+  metrics:
+    tags:
+      application: base-payments-gateway
+  endpoints:
+    security:
+      enabled: false
+    jmx:
+      exposure:
+        include: "*"
+    enabled-by-default: true
+    web:
+      exposure:
+        include: "*"
