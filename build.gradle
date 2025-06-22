@@ -33,7 +33,9 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-docker-compose'
 	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation 'org.wiremock.integrations:wiremock-spring-boot:3.6.0'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
