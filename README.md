@@ -1,8 +1,8 @@
 # 🚪 Base Payments Gateway
 
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.5-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.0-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
-[![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2023.0.3-blue.svg)](https://spring.io/projects/spring-cloud)
+[![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2025.0.0-blue.svg)](https://spring.io/projects/spring-cloud)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > A Spring Cloud Gateway application that routes API requests to the [Base Payments Service](https://github.com/DanielMachadoVasconcelos/base-payments).
@@ -36,8 +36,8 @@ This gateway serves as an API gateway for the Base Payments microservice archite
 | Technology | Version | Purpose |
 |------------|---------|---------|
 | [Java](https://www.oracle.com/java/) | 21 | Programming Language |
-| [Spring Boot](https://spring.io/projects/spring-boot) | 3.3.5 | Application Framework |
-| [Spring Cloud](https://spring.io/projects/spring-cloud) | 2023.0.3 | Cloud Native Development |
+| [Spring Boot](https://spring.io/projects/spring-boot) | 3.5.0 | Application Framework |
+| [Spring Cloud](https://spring.io/projects/spring-cloud) | 2025.0.0 | Cloud Native Development |
 | [Spring Cloud Gateway](https://spring.io/projects/spring-cloud-gateway) | - | API Gateway |
 | [Spring Cloud Netflix Eureka Client](https://spring.io/projects/spring-cloud-netflix) | - | Service Discovery |
 | [Spring Cloud LoadBalancer](https://spring.io/guides/gs/spring-cloud-loadbalancer/) | - | Load Balancing |

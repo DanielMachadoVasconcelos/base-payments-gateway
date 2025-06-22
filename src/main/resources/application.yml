@@ -9,22 +9,24 @@ spring:
       hint:
         base-payments: eureka  # Ensures that it uses Eureka to resolve base-payments instances
     gateway:
-      httpclient:
-        wiretap: true
-      routes:
-        - id: orders-route
-          uri: lb://BASE-PAYMENTS
-          predicates:
-            - Path=/orders/**
-          filters:
-            - AddRequestHeader=version, 1.0.0
+      server:
+        webflux:
+          httpclient:
+            wiretap: true
+          routes:
+            - id: orders-route
+              uri: lb://BASE-PAYMENTS
+              predicates:
+                - Path=/orders/**
+              filters:
+                - AddRequestHeader=version, 1.0.0
 
-        - id: products-route
-          uri: lb://BASE-PAYMENTS
-          predicates:
-            - Path=/products/**
-          filters:
-            - AddRequestHeader=version, 1.0.0
+            - id: products-route
+              uri: lb://BASE-PAYMENTS
+              predicates:
+                - Path=/products/**
+              filters:
+                - AddRequestHeader=version, 1.0.0
 
 eureka:
   client:
@@ -62,7 +64,7 @@ management:
     jmx:
       exposure:
         include: "*"
-    enabled-by-default: true
+    default-exposure: true
     web:
       exposure:
         include: "*"
