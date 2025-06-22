@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: base-payments-gateway
+  data:
+    redis:
+      host: localhost
+      port: 6379
   cloud:
     loadbalancer:
       hint:
@@ -19,6 +23,14 @@ spring:
               predicates:
                 - Path=/orders/**
               filters:
+                - name: RequestRateLimiter
+                  args:
+                    redis-rate-limiter.replenishRate: 10
+                    redis-rate-limiter.burstCapacity: 20
+                    redis-rate-limiter.requestedTokens: 1
+                    key-resolver: "#{@ipKeyResolver}"
+                    statusCode: TOO_MANY_REQUESTS
+                    denyEmptyResponse: false
                 - AddRequestHeader=version, 1.0.0
 
             - id: products-route
@@ -26,6 +38,14 @@ spring:
               predicates:
                 - Path=/products/**
               filters:
+                - name: RequestRateLimiter
+                  args:
+                    redis-rate-limiter.replenishRate: 10
+                    redis-rate-limiter.burstCapacity: 20
+                    redis-rate-limiter.requestedTokens: 1
+                    key-resolver: "#{@ipKeyResolver}"
+                    statusCode: TOO_MANY_REQUESTS
+                    denyEmptyResponse: false
                 - AddRequestHeader=version, 1.0.0
 
 eureka:
